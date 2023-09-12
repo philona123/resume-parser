@@ -17,7 +17,7 @@ export class ResumeController {
 
   @Post('upload')
   @UseInterceptors(FileInterceptor('resume'))
-  async uploadResume(@UploadedFile() file: any): Promise<string> {
+  async uploadResume(@UploadedFile() file): Promise<string> {
     const filePath = await this.uploadService.saveFile(file);
     const extractedText = await this.ocrService.extractTextFromPDF(filePath);
     return extractedText;
